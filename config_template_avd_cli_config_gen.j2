@@ -1,0 +1,11 @@
+hostname: {{ device.name }}
+management_interfaces:
+  Management1:
+    shutdown: false
+{%- if device.interfaces.get(name="Management1").vrf != null %}
+    vrf: {{ device.interfaces.get(name="Management1").vrf.name }}
+{%- else %}
+    vrf: default
+{%- endif %}
+    ip_address: {{ device.primary_ip4.address }}
+    type: oob
